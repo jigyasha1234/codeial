@@ -7,6 +7,7 @@ module.exports.profile = function (req, res) {
     title: "Users profile",
   });
 };
+
 //render the sign up page
 module.exports.signUp = function (req, res) {
   return res.render("user_sign_up", {
@@ -23,7 +24,6 @@ module.exports.signIn = function (req, res) {
 
 // get the sign up data
 module.exports.create = function (req, res) {
-
   if (req.body.password !== req.body.confirm_password) {
     return res.redirect("back");
   }
@@ -38,10 +38,16 @@ module.exports.create = function (req, res) {
       return res.redirect("back");
     }
   });
-
 };
 
 // get the sign in data and create session
 module.exports.createSession = function (req, res) {
-  //TODO later
+  // TODO later
+  console.log("hii", req.user);
+  // return res.redirect('/');
+//   return res.render('home', {
+//     title : "Home"
+// })
+
+  return res.redirect('/');
 };
