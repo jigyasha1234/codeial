@@ -10,6 +10,7 @@
   </form>
 
   <div id="posts-list-container">
+    <% if(locals.user){ %>
     <ul>
       <% for(post of posts){ %>
       <li>
@@ -18,8 +19,8 @@
           <small> <%= post.user.name %> </small>
         </p>
       </li>
-
       <%} %>
     </ul>
+    <% } %>
   </div>
 </section>
