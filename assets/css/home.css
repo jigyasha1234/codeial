@@ -1,2 +1,6 @@
 body {
   background-color: #82cafa; }
+
+small {
+  color: #8e2323;
+  font-weight: 600; }
