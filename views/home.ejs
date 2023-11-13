@@ -1,51 +1,15 @@
 <link rel="stylesheet" href="/css/home.css" />
-<h1>codeial <%= title %> page</h1>
+
+<h1><%= title %> page</h1>
 
 <section id="feed-posts">
-  <h4>Posts</h4>
-  <form action="/posts/create/" id="new--post-form" method="post">
-    <textarea name="content" cols="30" rows="5" placeholder="type here...." required>
-    </textarea>
-    <input type="submit" value="post" />
-  </form>
+  <!-- post form -->
+  <%- include('add_post_form'); %>
 
   <div id="posts-list-container">
-    <% if(locals.user){ %>
-    <ul>
-      <% for(post of posts){ %>
-      <li>
-        <p>
-          <%= post.content %>
-          <small> <%= post.user.name %> </small>
-        </p>
-        <div class="post-comments">
-          <% if(locals.user){ %>
-          <form action="/comments/create" method="post">
-            <input
-              type="text"
-              name="content"
-              placeholder="type your comment here..."
-              required
-            />
-            <input type="hidden" name="post" value="<%= post._id %>" />
-            <input type="submit" value="Add comment" />
-          </form>
-          <%} %>
-          <div class="post-comments-list">
-            <ul class="post-comments-list-<%= post._id %>">
-              <% for (comment of post.comments){%>
-              <p>
-                <b><%= comment.content %></b>
-                <br />
-                <small> <%= comment.user.name %> </small>
-              </p>
-              <%} %>
-            </ul>
-          </div>
-        </div>
-      </li>
-      <%} %>
-    </ul>
+    <% if(locals.user){ %>       
+        <%- include('post_list'); %>
     <% } %>
   </div>
+
 </section>

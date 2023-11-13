@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/post.css" />
+<link rel="stylesheet" href="/css/comments.css" />
+<ul>
+  <!-- iterating all posts -->
+  <% for(post of posts){ %>
+  <li>
+    <div>
+      <div class="post-style"><%= post.content %></div>
+      <br />
+      <div class="create-and-delete">
+        <% if(locals.user && locals.user.id == post.user.id){%>
+        <div class="delete">
+          <a href="/posts/destroy/<%= post.id %>"> delete post</a>
+        </div>
+        <%}%>
+        <div class="created-by">Created By: <%= post.user.name %></div>
+      </div>
+      <br />
+    </div>
+
+    <!-- iterating all comments and creating add comment -->
+
+    <div class="post-comments">
+      <div>
+        <% if(locals.user){ %> <%- include('add_comment_form.ejs'); %> <%} %>
+      </div>
+      <div class="post-comments-list"><%- include('post_comments'); %></div>
+    </div>
+  </li>
+  <%} %>
+</ul>

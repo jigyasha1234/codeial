@@ -1,0 +1,22 @@
+.comments{
+    display: flex;
+    width: 55%;
+    height: 43px;
+    justify-content: space-between;
+    background-color: cornflowerblue;
+    color: blue;
+    border-style: groove;
+}
+.comment-content{
+    padding: 10px !important;
+    font-size: larger;
+    font-weight: 600;
+    text-align: start;
+}
+
+.post-comments-list{
+    padding: 10px;
+    margin-right: 21px;
+    max-height: 200px;
+    overflow-y: scroll;
+}

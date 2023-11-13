@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/css/comments.css" />
+<ul class="post-comments-list-<%= post._id %>">
+    <li>
+    <% for (comment of post.comments){%>
+    <div class="comments">      
+      <div class="comment-content"><b><%= comment.content %></b></div>
+      <div class="comment-content"><small> commented by: <%= comment.user.name %> </small></div>
+      <div class="comment-content">
+        <% if(locals.user && locals.user.id == comment.user.id){%>
+          <small">
+            <a href="/comments/destroy/<%= comment.id %>"> delete comment</a>
+          </small>  
+        <%}%>
+      </div>
+    </div>
+    <%} %>
+  </li>
+  </ul>

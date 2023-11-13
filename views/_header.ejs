@@ -1,20 +1,22 @@
+
+<link rel="stylesheet" href="/css/_header.css" />
 <header>
-    <h3>
-        header part
-    </h3>
-    <ul>
+    <div class="header-style">
+        <div class="header-items">
+            header part
+        </div>
         <% if(locals.user) {%>
-            <li> <%= user.name %></li>
-            <li>
+            <div class="header-items"> <%= user.name %></div>
+            <div class="header-items">
                 <a href="/users/sign-out"> sign Out</a>
-            </li>
+            </div>
             <%}else{%>
-                <li>
+                <div class="header-items">
                     <a href="/users/sign-in"> sign In</a>
-                </li>
-                <li>
+                </div>
+                <div class="header-items">
                     <a href="/users/sign-up"> sign Up</a>
-                </li>
-            <% } %>
-    </ul>
+                </div>
+        <% } %>
+            </div>
 </header>

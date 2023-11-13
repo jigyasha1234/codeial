@@ -1,6 +1,17 @@
 body {
-  background-color: #82cafa; }
+  background-color: #82cafa;
+  text-align: center; }
+
+input {
+  margin-top: 10px;
+  font-size: large; }
 
 small {
   color: #8e2323;
   font-weight: 600; }
+
+#posts-list-container {
+  text-align: -webkit-center; }
+
+li {
+  list-style: none; }

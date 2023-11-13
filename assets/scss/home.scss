@@ -1,7 +1,19 @@
-body{
-    background-color: rgb(130, 202, 250);
+body {
+  background-color: rgb(130, 202, 250);
+  text-align: center;
 }
-small{
-    color: rgb(142, 35, 35);
-    font-weight: 600;
+input{
+  margin-top: 10px;
+  font-size: large;
+}
+small {
+  color: rgb(142, 35, 35);
+  font-weight: 600;
+}
+
+#posts-list-container {
+  text-align: -webkit-center;
+}
+li {
+  list-style: none;
 }

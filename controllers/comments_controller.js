@@ -16,3 +16,18 @@ module.exports.create = function (req, res) {
   });
   return res.redirect("/");
 };
+
+module.exports.destroy = function (req, res) {
+  Comment.findById(req.params.id).then(function (comment) {
+    if (comment.user == req.user.id) {
+      let postId = comment.post;
+      comment.deleteOne();
+      Post.findByIdAndUpdate(postId,{$pull: {comments: req.params.id}}).then(
+        function(){
+          return res.redirect('/');
+        })
+    }else{
+      return res.redirect('/');
+    }
+  });
+};

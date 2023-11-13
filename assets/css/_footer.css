@@ -1,10 +1,9 @@
 footer {
   height: 10%;
-  background-color: #100a39;
+  background-color: #060608;
   width: 100%;
   color: white;
   text-align: center;
   padding-top: 10px; }
-
-#footer-main {
-  border-radius: 10px; }
+  footer #footer-main {
+    border: 10px white; }
