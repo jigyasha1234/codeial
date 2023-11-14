@@ -4,6 +4,7 @@
     background-color: #f0b9f2;
     color: black;
     margin-top: 10px;
+    overflow: scroll;
 }
 .create-and-delete{
     display: flex;
@@ -15,4 +16,7 @@
 }
 .created-by{
     padding: 10px !important;
+}
+.delete{
+    padding: 11px;
 }
