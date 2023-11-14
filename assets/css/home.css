@@ -1,7 +1,5 @@
 body {
-  background-color: black;
-  text-align: center;
-  color: white; }
+  text-align: center; }
 
 input {
   margin-top: 10px;
@@ -23,4 +21,9 @@ li {
     width: 70%;
     border: 10px whitergb(23, 35, 70); }
   .home-container #user-friends {
-    width: 30%; }
+    width: 30%;
+    background-color: beige;
+    color: purple; }
+    .home-container #user-friends a {
+      color: green;
+      font-style: none; }
