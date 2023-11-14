@@ -1,6 +1,7 @@
 body {
-  background-color: #82cafa;
-  text-align: center; }
+  background-color: black;
+  text-align: center;
+  color: white; }
 
 input {
   margin-top: 10px;
@@ -15,3 +16,11 @@ small {
 
 li {
   list-style: none; }
+
+.home-container {
+  display: flex; }
+  .home-container #feed-posts {
+    width: 70%;
+    border: 10px whitergb(23, 35, 70); }
+  .home-container #user-friends {
+    width: 30%; }

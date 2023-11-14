@@ -1,16 +1,9 @@
-
 const Post = require('../models/post');
+const User = require('../models/user');
 
 // module.exports.actionName=function(req,res){}
 
 module.exports.home = function(req,res){
-    // Post.find({}).then(function(post){
-    //     return res.render('home', {
-    //         title: "Codeial | Home",
-    //         posts: post
-    //     });
-    // })
-
     Post.find({}).populate('user').populate({
         path: 'comments',
         populate: {
@@ -19,10 +12,15 @@ module.exports.home = function(req,res){
     })
     .exec().then(
         function(posts){
-            return res.render('home', {
-                title: "Codeial | Home",
-                posts: posts
-            });
+            User.find({}).then(
+                function(users){
+                    return res.render('home', {
+                        title: "Codeial | Home",
+                        posts: posts,
+                        all_user: users,
+                    });
+                }
+            )
         }
     );
     

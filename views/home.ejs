@@ -1,15 +1,20 @@
 <link rel="stylesheet" href="/css/home.css" />
 
-<h1><%= title %> page</h1>
-
-<section id="feed-posts">
-  <!-- post form -->
-  <%- include('add_post_form'); %>
-
-  <div id="posts-list-container">
-    <% if(locals.user){ %>       
-        <%- include('post_list'); %>
-    <% } %>
-  </div>
-
-</section>
+<div class="home-container">
+  <section id="feed-posts">
+    <!-- post form -->
+    <%- include('add_post_form'); %>
+    <div id="posts-list-container">
+      <% if(locals.user){ %> <%- include('post_list'); %> <% } %>
+    </div>
+  </section>
+  <section id="user-friends">
+    <h4>Friends</h4>
+    <% for(u of all_user){%>
+    <p>
+      <%= u.name %>
+      <a href="/users/profile/<%= u.id %>"> details </a>
+    </p>
+    <%}%>
+  </section>
+</div>

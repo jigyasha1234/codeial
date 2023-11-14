@@ -1,6 +1,7 @@
 body {
-  background-color: rgb(130, 202, 250);
+  background-color: black;
   text-align: center;
+  color: white;
 }
 input{
   margin-top: 10px;
@@ -16,4 +17,14 @@ small {
 }
 li {
   list-style: none;
+}
+.home-container{
+  display: flex;
+  #feed-posts{
+    width: 70%;
+    border: 10px whitergb(23, 35, 70)
+  }
+  #user-friends{
+    width: 30%;
+  }
 }
