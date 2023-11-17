@@ -4,7 +4,7 @@ const User = require('../models/user');
 // module.exports.actionName=function(req,res){}
 
 module.exports.home = function(req,res){
-    Post.find({}).populate('user').populate({
+    Post.find({}).sort('-createdAt').populate('user').populate({
         path: 'comments',
         populate: {
             path:'user'

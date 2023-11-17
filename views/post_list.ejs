@@ -3,14 +3,14 @@
 <ul>
   <!-- iterating all posts -->
   <% for(post of posts){ %>
-  <li>
+  <li id="post-<%= post._id %>">
     <div>
       <div class="post-style"><%= post.content %></div>
       <br />
       <div class="create-and-delete">
         <% if(locals.user && locals.user.id == post.user.id){%>
         <div class="delete">
-          <a href="/posts/destroy/<%= post.id %>"> delete post</a>
+          <a href="/posts/destroy/<%= post.id %>" id="delete-post-button"> delete post</a>
         </div>
         <%}%>
         <div class="created-by">Created By: <%= post.user.name %></div>
