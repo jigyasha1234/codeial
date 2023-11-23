@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const fs = require('fs');
+const path = require('path');
 
 // module.exports.actionName=function(req,res){}
 
@@ -12,19 +14,36 @@ module.exports.profile = function (req, res) {
     }
   )
 };
-module.exports.update = function (req, res) {
+
+module.exports.update = async function (req, res) {
   if(req.user.id == req.params.id){
-    User.findByIdAndUpdate(req.params.id, req.body).then(
-      function(user){
-        return res.redirect('back');
+   try{
+    let user = await User.findById(req.params.id);
+    User.uploadedAvatar(req,res,function(error){
+      console.log(req.file);
+      user.name = req.body.name;
+      user.email = req.body.email;
+      if(req.file){
+        if(user.avatar){
+          fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+        }
+        user.avatar = User.avatarPath+'/'+req.file.filename;
       }
-    )
+      user.save();
+      return res.redirect('back');  
+    });         
+    }
+    catch(error) {
+      console.error(error);
+      return res.status(500).send("Internal server error");
+    }
   }
   else{
     return res.status(401).send('unauthorized');
   }
 
 };
+
 //render the sign up page
 module.exports.signUp = function (req, res) {
   if(req.isAuthenticated()){
