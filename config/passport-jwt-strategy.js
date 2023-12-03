@@ -9,8 +9,7 @@ let opts = {
     secretOrKey : 'secret',
 }
 passport.use(new jwtStrategy(opts,function(jwtPayLoad, done){
-    User.findById(jwtPayLoad._id, function(err,user){
-        if(error){console.log("jigyasha see error",error); return;}
+    User.findById(jwtPayLoad._id).then( function(user){
         if(user){
             return done(null,user);
         }else{

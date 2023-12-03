@@ -20,11 +20,18 @@ module.exports.index = async function (req, res) {
 module.exports.destroy = async function (req, res) {
   try {
     let post = await Post.findById(req.params.id);
-    await post.deleteOne();
-    await Comment.deleteMany({ post: req.params.id });
-    return res.status(200).json({
-        message: "post and associated comments deleted successfully!",
+    if(post.user == req.user.id){
+      await post.deleteOne();
+      await Comment.deleteMany({ post: req.params.id });
+      return res.status(200).json({
+          message: "post and associated comments deleted successfully!",
+        });
+    }else{
+      return res.status(200).json({
+        message: "you can't not deleted this post !",
       });
+    }
+    
   } catch (error) {
     console.error(error);
     return res.json(500, {

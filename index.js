@@ -47,7 +47,7 @@ app.set('views', './views');
 // mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'codeial',
-    secret: "something",
+    secret: "secret",
     resave: false,
     cookie: {
         maxAge: (1000 * 60 *100)
