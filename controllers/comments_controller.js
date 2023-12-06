@@ -1,21 +1,62 @@
 const Comment = require("../models/comment");
 const Post = require("../models/post");
+const commentsMailer = require('../mailers/comments_mailer');
+const nodeMailer = require('../config/nodemailer');
 
-module.exports.create = function (req, res) {
-  Post.findById(req.body.post).then(function (post) {
-    if (post) {
-      Comment.create({
-        content: req.body.content,
-        post: req.body.post,
-        user: req.user._id,
-      }).then(function (comment) {
-        post.comments.push(comment);
-        post.save();
-      });
+module.exports.create = async function(req, res)
+{
+    try
+    {
+        let post = await Post.findById(req.body.post);
+        if(post)
+        {
+            let comment = await Comment.create
+            (
+                {
+                    content: req.body.content,
+                    post: req.body.post,
+                    user: req.user._id
+                }
+            );
+            post.comments.push(comment);
+            post.save();           
+
+            // // when not using redis
+            // commentsMailer.newComment(comment);
+
+           let comt = await Comment.findById({_id: comment._id}).populate("user")
+           .populate({
+             path: "post",
+             populate: {
+               path: "user",
+             },
+           })
+
+            commentsMailer.newComment(comt);
+
+            if (req.xhr)
+            {
+                return res.status(200).json
+                ({
+                    data: 
+                    {
+                        comment: comment
+                    },
+                    message: "Comment created"
+                });
+            }
+
+            req.flash('success', 'Comment Added');
+            return res.redirect('back');
+        }
     }
-  });
-  return res.redirect("/");
-};
+    catch(err)
+    {
+        req.flash('error', err);
+        console.log(err);
+        return res.redirect('back');
+    }
+}
 
 module.exports.destroy = function (req, res) {
   Comment.findById(req.params.id).then(function (comment) {
