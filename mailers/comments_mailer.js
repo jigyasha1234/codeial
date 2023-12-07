@@ -1,14 +1,17 @@
 const nodeMailer = require('../config/nodemailer');
 
 exports.newComment = (comment) => {
-    console.log('inside newcomment mailer:', comment.user.email);
 
+    console.log("check",comment.content);
 
+    let htmlString = nodeMailer.renderTemplate({comment: comment} , "/comments/new_comment.ejs");
+    console.log('Inside newComment Mailer');
+    
     nodeMailer.transporter.sendMail({
         from: 'jigrani0000@gmail.com',
         to: comment.user.email,
         subject: "New comment published!",
-        html: '<h1>Yup, your comment is now published!</h1>'
+        html: htmlString
     }, (err, info) =>
     {
         if(err)
@@ -16,7 +19,6 @@ exports.newComment = (comment) => {
             console.log('Error in sending mail', err);
             return;
         }
-        console.log('Message sent', info);
         return;
     })
 }

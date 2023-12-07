@@ -21,8 +21,7 @@ module.exports.create = async function(req, res)
             post.comments.push(comment);
             post.save();           
 
-            // // when not using redis
-            // commentsMailer.newComment(comment);
+            // when not using redis
 
            let comt = await Comment.findById({_id: comment._id}).populate("user")
            .populate({
@@ -30,10 +29,9 @@ module.exports.create = async function(req, res)
              populate: {
                path: "user",
              },
-           })
-
+           })           
             commentsMailer.newComment(comt);
-
+            
             if (req.xhr)
             {
                 return res.status(200).json
