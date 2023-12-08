@@ -2,8 +2,6 @@ const nodeMailer = require('../config/nodemailer');
 
 exports.newComment = (comment) => {
 
-    console.log("check",comment.content);
-
     let htmlString = nodeMailer.renderTemplate({comment: comment} , "/comments/new_comment.ejs");
     console.log('Inside newComment Mailer');
     
