@@ -23,15 +23,14 @@ module.exports.create = async function(req, res)
             post.comments.push(comment);
             post.save();           
 
-            // when not using redis
-
            let comt = await Comment.findById({_id: comment._id}).populate("user")
            .populate({
              path: "post",
              populate: {
                path: "user",
              },
-           })           
+           });           
+           // when not using redis
             // commentsMailer.newComment(comt);
             let job = queue.create('emails',comt).save(function(err){
               if(err){
@@ -39,7 +38,7 @@ module.exports.create = async function(req, res)
                 return;
               }
               console.log('job enqueued',job.id);
-            })
+            });
             
             if (req.xhr)
             {

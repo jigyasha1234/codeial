@@ -7,7 +7,7 @@
       <div class="comment-content"><small> commented by: <%= comment.user.name %> </small></div>
       <div class="comment-content">
         <% if(locals.user && locals.user.id == comment.user.id){%>
-          <small">
+          <small>
             <a href="/comments/destroy/<%= comment.id %>"> delete comment</a>
           </small>  
         <%}%>
