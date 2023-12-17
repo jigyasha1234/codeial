@@ -3,15 +3,21 @@
     <li>
     <% for (comment of post.comments){%>
     <div class="comments">      
-      <div class="comment-content"><b><%= comment.content %></b></div>
-      <div class="comment-content"><small> commented by: <%= comment.user.name %> </small></div>
-      <div class="comment-content">
-        <% if(locals.user && locals.user.id == comment.user.id){%>
-          <small>
-            <a href="/comments/destroy/<%= comment.id %>"> delete comment</a>
-          </small>  
-        <%}%>
-      </div>
+      <table style="width:100%">
+        <tr>
+          <td style="width:130px"><b><%= comment.content %></b></td>                  
+          <td style="width:35px"><label class="switch">
+            <input type="checkbox">            
+            <span class="heart-style"><i class="fa fa-heart"></i></span>
+          </label></td>
+          <td style="width:35px;" ><% if(locals.user && locals.user.id == comment.user.id){%>
+            <small>
+              <a href="/comments/destroy/<%= comment.id %>"> X </a>
+            </small>  
+          <%}%></td>
+          <td style="width:60px;"><small>: <%= comment.user.name %> </small></td>  
+        </tr>       
+      </table>
     </div>
     <%} %>
   </li>
