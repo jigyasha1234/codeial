@@ -8,6 +8,7 @@
       <% if(locals.user){ %> <%- include('post_list'); %> <% } %>
     </div>
   </section>
+  
   <section id="user-friends">
     <h1>Friends</h1>
     <% for(u of all_user){%>
@@ -19,3 +20,4 @@
   </section>
 </div>
 <script src="/js/home_posts.js"></script>
+<script src="/js/home_post_comments.js"></script>

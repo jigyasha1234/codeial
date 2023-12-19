@@ -11,36 +11,10 @@
   padding: 10px !important;
   font-size: larger;
   font-weight: 600;
-  text-align: start; 
-}
+  text-align: start; }
 
 .post-comments-list {
   padding: 10px;
   margin-right: 21px;
   max-height: 200px;
   overflow-y: scroll; }
-
-  table, td {
-    text-align: left;
-  }
-
-.heart-style{
-  font-size: 28px;
-  color: white;
-}
-
-.heart-style:before {
-  font-size: 28px;
-  color: white;
-}
-
-input:checked + .heart-style {
-  color: red;
-  font-size: 28px;
-}
-
-input:checked + .heart-style:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}

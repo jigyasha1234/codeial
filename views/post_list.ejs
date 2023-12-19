@@ -24,7 +24,7 @@
       <div>
         <% if(locals.user){ %> <%- include('add_comment_form.ejs'); %> <%} %>
       </div>
-      <div class="post-comments-list"><%- include('post_comments'); %></div>
+      <div class="post-comments-list"  id="posts-comments-container"><%- include('post_comments'); %></div>
     </div>
   </li>
   <%} %>

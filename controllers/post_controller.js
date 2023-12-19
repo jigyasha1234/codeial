@@ -2,6 +2,7 @@
 
 const Post = require("../models/post");
 const Comment = require("../models/comment");
+const Like = require("../models/like");
 
 module.exports.create = async function (req, res) {
   try {
@@ -30,6 +31,10 @@ module.exports.destroy = async function (req, res) {
       return res.status(404).send("Post not found");
     }
     if (post.user == req.user.id) {
+
+      // await Like.deleteMany({likeable: post, onmodel: 'Post'});
+      // await Like.deleteMany({_id: {$in: post.comments}});
+
       await post.deleteOne();
       await Comment.deleteMany({ post: req.params.id });
       
