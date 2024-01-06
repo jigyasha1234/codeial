@@ -20,8 +20,8 @@ module.exports.create = async function(req, res)
                     user: req.user._id
                 }
             );
-            await post.comments.push(comment);
-            await post.save();           
+            post.comments.push(comment);
+            post.save();           
 
            let comt = await Comment.findById({_id: comment._id}).populate("user")
            .populate({
@@ -56,37 +56,25 @@ module.exports.create = async function(req, res)
             return res.redirect('back');
         }
     }
-    catch (error) {
-      console.error(error);
-      return res.status(500).send("Internal server error");
+    catch(err)
+    {
+        req.flash('error', err);
+        console.log(err);
+        return res.redirect('back');
     }
 }
 
-module.exports.destroy = async function (req, res) {
-  try{
-const comment = await Comment.findById(req.params.id);
-if(!comment){
-  return res.status(404).send("comment noy found");
-}
-
-if (comment.user == req.user.id) {
-  let postId = comment.post;
-  await comment.deleteOne();
-  await Post.findByIdAndUpdate(postId,{$pull: {comments: req.params.id}}).then(
-    function(){
+module.exports.destroy = function (req, res) {
+  Comment.findById(req.params.id).then(function (comment) {
+    if (comment.user == req.user.id) {
+      let postId = comment.post;
+      comment.deleteOne();
+      Post.findByIdAndUpdate(postId,{$pull: {comments: req.params.id}}).then(
+        function(){
+          return res.redirect('/');
+        })
+    }else{
       return res.redirect('/');
-    })
-    if(req.xhr){
-      return res.status(200).json({
-        data: {
-          comment_id: req.params.id
-        },
-        message: "comment deleted"
-      });
     }
-}
-}catch (error) {
-  console.error(error);
-  return res.status(500).send("Internal server error");
-}
+  });
 };

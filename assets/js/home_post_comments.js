@@ -1,3 +1,5 @@
+const { toggleLike } = require("../../controllers/likes_controller");
+
 {
   let createComment = function () {
     let newCommentForm = $("#new-comment-form");
@@ -10,7 +12,19 @@
         success: function (data) {
           let newComment = newCommentDom(data.data.comment);
           $("#posts-comments-container>ul").prepend(newComment);
-          deleteComment($(` .delete-comment-button`, newComment));
+          pSelf.deleteComment($(` .delete-comment-button`, newComment));
+          
+           // enable the functionality of the toggle like button on the new comment
+           new ToggleLike($(' .toggle-like-button', newComment));
+
+           new Noty({
+               theme: 'relax',
+               text: "Comment Added",
+               type: 'success',
+               layout: 'topRight',
+               timeout: 1500
+               
+           }).show();
         },
         error: function (error) {
           console.log(error);

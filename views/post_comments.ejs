@@ -1,33 +1,18 @@
 <link rel="stylesheet" href="/css/comments.css" />
 <ul class="post-comments-list-<%= post._id %>">
-    
+    <li>
     <% for (comment of post.comments){%>
-      <li id="comment-<%= comment._id %>">
     <div class="comments">      
-      <table style="width:100%">
-        <tr>
-          <td style="width:130px"><b><%= comment.content %></b></td>                  
-          <td style="width:35px">
-            <small>
-              <% if(locals.user) { %>
-                  <a class="toggle-like-button" data-likes="<%= comment.likes.length %>" href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
-                      <%= comment.likes.length %> Likes
-                  </a>
-              <% } else { %>
-                  <%= comment.likes.length %> Likes
-              <% } %>
-          </small>
-        </td>
-          <td style="width:35px;" ><% if(locals.user && locals.user.id == comment.user.id){%>
-            <small>
-              <a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>"> X </a>
-            </small>  
-          <%}%></td>
-          <td style="width:60px;"><small>: <%= comment.user.name %> </small></td>  
-        </tr>       
-      </table>
+      <div class="comment-content"><b><%= comment.content %></b></div>
+      <div class="comment-content"><small> commented by: <%= comment.user.name %> </small></div>
+      <div class="comment-content">
+        <% if(locals.user && locals.user.id == comment.user.id){%>
+          <small>
+            <a href="/comments/destroy/<%= comment.id %>"> delete comment</a>
+          </small>  
+        <%}%>
+      </div>
     </div>
-  </li>
     <%} %>
-  
+  </li>
   </ul>
